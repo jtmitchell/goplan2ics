@@ -8,26 +8,28 @@ import (
 )
 
 type Client struct {
-	conn net.Conn
+	Name string
+	Conn net.Conn
 }
 
-func (c *Client) connect(address string) {
+func NewClient(address string) *Client {
 	conn, err := net.Dial("tcp", address)
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
 	}
-	c.conn = conn
+	c := &Client{clientId(), conn}
+	c.Send("=" + c.Name)
+	c.Send("t0")
 	
-	c.send("=" + c.clientId())
-	c.send("t0")
+	return c
 }
 
-func (c *Client) send(data string) {
-	fmt.Fprintf(c.conn,"%s\r\n", data)
+func (c *Client) Send(data string) {
+	fmt.Fprintf(c.Conn,"%s\r\n", data)
 }
 
-func (c *Client) clientId() (string) {
+func clientId() (string) {
 	uid := "1"
 	gid := "1"
 	pid := os.Getpid()
