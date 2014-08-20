@@ -1,0 +1,26 @@
+# Eclipse files
+.classpath
+.project
+.settings/
+.env
+
+# Go test binaries
+*.test
+
+# compiled binaries in third_party
+/third_party/pkg
+
+*~
+
+# Vim-related files
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+*.un~
+Session.vim
+
+# OSX
+._*
+
+# This is where the result of the go build goes
+/output/**
+/output
